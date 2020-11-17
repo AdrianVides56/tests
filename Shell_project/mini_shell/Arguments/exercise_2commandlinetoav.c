@@ -2,21 +2,22 @@
 #include <stdlib.h>
 #include <string.h>
 
-char *split(char* line)
+#define DELIM " "
+
+char **split(char* line)
 {
-        const char s[2] = " ";
-	char *token, *token2[strlen(line)];
+	char *token, **token2;
 	int i = 0;
 
-	token = strtok(line, s);
-	token2[i] = token;
+	token = strtok(line, DELIM);
 
 	while (token != NULL)
 	{
-		token = strtok(NULL, s);
-		i++;
 		token2[i] = token;
+		i++;
+		token = strtok(NULL, DELIM);
 	}
+	token2[i] = NULL;
 
-        return (*token2);
+        return (token2);
 }
