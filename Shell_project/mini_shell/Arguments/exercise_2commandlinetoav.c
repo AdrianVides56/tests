@@ -4,20 +4,19 @@
 
 #define DELIM " "
 
-char **split(char* line)
+int *split(char *line)
 {
-	char *token, **token2;
+	char *token, *token2;
 	int i = 0;
 
 	token = strtok(line, DELIM);
 
 	while (token != NULL)
-	{
+	{	
 		token2[i] = token;
-		i++;
 		token = strtok(NULL, DELIM);
+		i++;
 	}
-	token2[i] = NULL;
-
-        return (token2);
+	tokens2[i] = NULL;
+	return (tokens2);
 }
