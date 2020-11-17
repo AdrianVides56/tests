@@ -13,11 +13,11 @@ int main(int ac, char *av[])
 		{
 			if (EOF)
 				exit(EXIT_SUCCESS);
-			else
+/*			else
 			{
 				perror("lsh: getline\n");
 				exit(EXIT_FAILURE);
-			}
+*/			}
 		}
 	}
 }
