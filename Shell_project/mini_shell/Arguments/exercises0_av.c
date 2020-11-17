@@ -10,6 +10,9 @@
 
 int main(int ac, char **av)
 {
+	/** We use double pointer here to not loose the address 
+	  of the original array **/
+
         int a;
         for(a = 0; av[a] != '\0'; a++)
         {
