@@ -6,6 +6,9 @@
 #include <sys/wait.h>
 
 #define DELIM " ,!¡¿?\'\"\n\t"
+#define GREEN_T "\x1b[32m"
+#define RESET_COLOR "\x1b[37m"
+
 char *_strcat(char *dest, char *src);
 int main(void)
 {
@@ -22,7 +25,7 @@ int main(void)
 		reset = 0;
 		char path[60] = "/bin/";
 		if (isatty(STDOUT_FILENO) == 1)
-		        printf("%s", prompt);
+		        printf(GREEN_T "%s" RESET_COLOR, prompt);
 
 		getln = getline(&buffer, &bufsize, stdin);
 		if (getln == EOF)
