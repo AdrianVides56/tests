@@ -4,9 +4,9 @@
 
 #define DELIM " "
 
-int *split(char *line)
+char **split(char *line)
 {
-	char *token, *token2;
+	char *token, **token2;
 	int i = 0;
 
 	token = strtok(line, DELIM);
@@ -17,6 +17,6 @@ int *split(char *line)
 		token = strtok(NULL, DELIM);
 		i++;
 	}
-	tokens2[i] = NULL;
-	return (tokens2);
+	token2[i] = NULL;
+	return (token2);
 }
