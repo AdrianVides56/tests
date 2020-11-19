@@ -9,7 +9,7 @@
 char *_strcat(char *dest, char *src);
 int main(void)
 {
-	char *prompt = "hola@shell$ ", *BUFFER;
+	char *prompt = "hola@shell$ ", *buffer;
 	size_t bufsize = 1024;
 	pid_t child_pid;
 	char *token = NULL, *token2[1024];
@@ -21,16 +21,17 @@ int main(void)
 		i = 0;
 		reset = 0;
 		char path[60] = "/bin/";
-		printf("%s", prompt);
+		if (isatty(STDOUT_FILENO) == 1)
+		        printf("%s", prompt);
 
-		getln = getline(&BUFFER, &bufsize, stdin);
+		getln = getline(&buffer, &bufsize, stdin);
 		if (getln == EOF)
 		{
 			printf("\n");
 			exit(EXIT_SUCCESS);
 		}
 
-		token = strtok(BUFFER, DELIM);
+		token = strtok(buffer, DELIM);
 		while (token != NULL)
        		{
        			token2[i] = token;
@@ -44,11 +45,11 @@ int main(void)
 			perror("Error");
 			return (1);
 		}
-		_strcat(path, token2[0]);
-		printf("Postion 1:%s---Position 2: %s-----path: %s\n", token2[0], token2[1], path);
+		
+
 		if (child_pid == 0)
 		{
-			if (execve(path, token2, NULL) == -1)
+		  if (execve(_strcat(path, token2[0]), token2, NULL) == -1)
        			{
        				perror("Error");
 			}
