@@ -55,28 +55,35 @@ char *_strstr(char *haystack, char *needle)
  */
 void _execve(char *path, char __attribute__((unused)) *command, char **flags, char __attribute__((unused)) **envi)
 {
-	char *token = NULL, *token2[1024], *execute = NULL;
+	char *token, *token2[1024], *execute;
+	char *tmp;
+	const char delim[2] = ":";
 	int i = 0;
+	
+	tmp = malloc(sizeof(char ) * (strlen(path) +1));
+	tmp = strcpy(tmp, path);
 
-	token = strtok(path, ":");
+	token = strtok(tmp, delim);
 	while (token != NULL)
 	{
 		token2[i] = token;
-		token = strtok(NULL, ":");
+		token = strtok(NULL, delim);
+		//	printf("%s--------\n", token2[i]);
 		i++;
 	}
 	token2[i] = NULL;
 
 	for (i = 0; token2[i] != NULL; i++)
 	{
-		execute = NULL;
-		_strcat(token2[i], "/");
-		/*execute = _strcat(token2[i], command);*/
 
-		if (execve(execute, flags, NULL) == -1)
-			continue;
+	  //_strcat(tmp2, "/");
+		printf("%s------------------\n", token2[i]);
+		/*execute =*/// _strcat(tmp2, command);
+
+		//if (execve(execute, flags, NULL) == -1)
+		/*	continue;*/
        		/* printf("Execute path: %s\n", execute);
-		 if (check == -1)
-		  printf("%s\n", execute);*/
+		 if (check == -1)*/
+		printf("%s\n", token2[i]);
 	}
 }

@@ -13,8 +13,8 @@ int main(int argc, char **argv, char **envp)
 	char *token = NULL, *token2[1024], *path;
 	size_t bufsize = 1024, getln;
 	pid_t child_pid;
-	int reset, i;
-
+	int reset, i, status;
+	
 	while (1)
 	{
 		i = 0;
@@ -40,10 +40,10 @@ int main(int argc, char **argv, char **envp)
 //			printf("%s\n", path);
 			_execve(path, token2[0], token2, envp);
 
-			exit(0);
+			/*exit(0);*/
 		}
 		else
-			child_pid = wait(NULL);
+			 wait(NULL);
 		for (; reset <= i; reset++)
 			token2[reset] = NULL;
 	}
