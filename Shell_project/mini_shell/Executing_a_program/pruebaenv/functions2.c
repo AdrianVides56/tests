@@ -53,10 +53,10 @@ char *_strstr(char *haystack, char *needle)
  * @flags: flags of the command
  * @envi: enviromental variable
  */
-void _execve(char *path, char *command, char **flags, char **envi)
+void _execve(char *path, char *command, char **flags, char __attribute__((unused)) **envi)
 {
 	char *token = NULL, *token2[1024], *execute = NULL;
-	int i = 0, len = 0;
+	int i = 0;
 
 	token = strtok(path, ":");
 	while (token != NULL)
@@ -65,17 +65,18 @@ void _execve(char *path, char *command, char **flags, char **envi)
 		token = strtok(NULL, ":");
 		i++;
 	}
+	token2[i] = NULL;
 
 	for (i = 0; token2[i] != NULL; i++)
 	{
 		execute = NULL;
 		_strcat(token2[i], "/");
-		execute = _strcat(token2[i], command);
+		/*execute = _strcat(token2[i], command);*/
 
 		if (execve(execute, flags, NULL) == -1)
 			continue;
-		printf("Execute path: %s\n", execute);
-//                if (check == -1)
-		//              printf("%s\n", execute);
+       		/* printf("Execute path: %s\n", execute);
+		 if (check == -1)
+		  printf("%s\n", execute);*/
 	}
 }
