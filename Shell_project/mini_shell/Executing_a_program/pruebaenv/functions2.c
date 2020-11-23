@@ -53,7 +53,7 @@ char *_strstr(char *haystack, char *needle)
  * @flags: flags of the command
  * @envi: enviromental variable
  */
-void _execve(char *path, char *command, char **flags, char __attribute__((unused)) **envi)
+void _execve(char *path, char __attribute__((unused)) *command, char **flags, char __attribute__((unused)) **envi)
 {
 	char *token = NULL, *token2[1024], *execute = NULL;
 	int i = 0;
