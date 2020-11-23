@@ -38,7 +38,7 @@ int main(int argc, char **argv, char **envp)
 		{
 			path = _getenv(envp, "PATH");
 //			printf("%s\n", path);
-			_execve(path, token2[0]/*, token2*/);
+			_execve(path, token2[0], token2, envp);
 
 			exit(0);
 		}

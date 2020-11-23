@@ -16,7 +16,7 @@ char *_strcat(char *dest, char *src);
 char **_strtok(char *line);
 size_t _strlen(char *str);
 void errors(int errornum);
-int _execve(char *path, char *argv/*, const char *ep*/);
+void _execve(char *path, char *command, char **flags, char **envi);
 char *_getenv(char **myEnvp, char *path);
 char *_strstr(char *haystack, char *needle);
 
