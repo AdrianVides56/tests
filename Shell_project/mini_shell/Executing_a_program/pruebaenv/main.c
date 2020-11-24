@@ -13,16 +13,16 @@ int main(int argc, char **argv, char **envp)
 	char *token = NULL, *token2[1024], *path;
 	size_t bufsize = 1024, getln;
 	pid_t child_pid;
-	int reset, i, status;
-	
+	int reset, i;
+
 	while (1)
 	{
 		i = 0;
 		reset = 0;
-		if (isatty(STDOUT_FILENO) == 1)
-			printf(GREEN_T "%s" RESET_COLOR, prompt);
+		isatty(STDOUT_FILENO);
+		printf(GREEN_T "%s" RESET_COLOR, prompt);
 		getln = getline(&line, &bufsize, stdin);
-		if (getln == EOF)
+		if (getln == EOF || (strcmp(line, "exit\n") == 0))
 			errors(0);
 		token = strtok(line, DELIM);
 		while (token != NULL)
@@ -38,13 +38,14 @@ int main(int argc, char **argv, char **envp)
 		{
 			path = _getenv(envp, "PATH");
 //			printf("%s\n", path);
-			_execve(path, token2[0], token2, envp);
+			_execve(path, token2[0], token2);
 
-			/*exit(0);*/
 		}
 		else
+		{
 			 wait(NULL);
-		for (; reset <= i; reset++)
+		}
+		for (reset = 0; reset <= i; reset++)
 			token2[reset] = NULL;
 	}
 	return (0);

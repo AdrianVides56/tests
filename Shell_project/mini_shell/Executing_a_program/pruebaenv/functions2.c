@@ -51,15 +51,14 @@ char *_strstr(char *haystack, char *needle)
  * @path: path to follow
  * @command: command to execute
  * @flags: flags of the command
- * @envi: enviromental variable
  */
-void _execve(char *path, char __attribute__((unused)) *command, char **flags, char __attribute__((unused)) **envi)
+void _execve(char *path, char *command, char **flags)
 {
 	char *token, *token2[1024], *execute;
-	char *tmp;
+	char *tmp, *tmp2;
 	const char delim[2] = ":";
 	int i = 0;
-	
+
 	tmp = malloc(sizeof(char ) * (strlen(path) +1));
 	tmp = strcpy(tmp, path);
 
@@ -68,22 +67,16 @@ void _execve(char *path, char __attribute__((unused)) *command, char **flags, ch
 	{
 		token2[i] = token;
 		token = strtok(NULL, delim);
-		//	printf("%s--------\n", token2[i]);
 		i++;
 	}
-	token2[i] = NULL;
 
+	tmp2 = malloc(sizeof(char) * 64);
 	for (i = 0; token2[i] != NULL; i++)
 	{
-
-	  //_strcat(tmp2, "/");
-		printf("%s------------------\n", token2[i]);
-		/*execute =*/// _strcat(tmp2, command);
-
-		//if (execve(execute, flags, NULL) == -1)
-		/*	continue;*/
-       		/* printf("Execute path: %s\n", execute);
-		 if (check == -1)*/
-		printf("%s\n", token2[i]);
+		tmp2 = strcpy(tmp2, token2[i]);
+		_strcat(tmp2, "/");
+		_strcat(tmp2, command);
+		if (execve(tmp2, flags, NULL) == -1)
+			continue;
 	}
 }
