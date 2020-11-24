@@ -1,6 +1,32 @@
 #include "shell.h"
 
 /**
+ * _getline - prints the prompt and wait for instructions
+ * @val_issaty: value of issaty function
+ * Return: the read line
+ */
+char *_getline(size_t val_issaty)
+{
+	size_t bufsize = 0, getln = 0;
+	char *line = NULL;
+
+	if (val_issaty == 1)
+	{
+		write(STDOUT_FILENO, "\033[1;32mRASH@SHELL$", 19);
+		write(STDOUT_FILENO, "\033[0m]", 4);
+	}
+
+	getln = getline(&line, &bufsize, stdin);
+
+	if (getln == EOF)
+	{
+		_putchar(10);
+		exit(EXIT_SUCCESS);
+	}
+	return (line);
+}
+
+/**
  * *_getenv - gets the enviromental variables
  * @myEnvp: pointer to envp in main function
  * @path: string "PATH"
@@ -79,4 +105,5 @@ void _execve(char *path, char *command, char **flags)
 		if (execve(tmp2, flags, NULL) == -1)
 			continue;
 	}
+	errors(127);
 }

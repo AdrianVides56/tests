@@ -15,10 +15,8 @@ void errors(int errornum)
 		exit(EXIT_SUCCESS);
 	}
 	else if (errornum == 0)
-	{
-		write(STDOUT_FILENO, newline, _strlen(newline));
 		exit(EXIT_SUCCESS);
-	}
+
 	else if (errornum == 127)
 		write(STDOUT_FILENO, notfound, _strlen(notfound));
 }

@@ -9,27 +9,23 @@
  */
 int main(int argc, char **argv, char **envp)
 {
-	char *prompt = "hola@shell$ ", *line;
+	char *line;
 	char *token = NULL, *token2[1024], *path;
-	size_t bufsize = 1024, getln;
+	size_t getln, reset, i;
 	pid_t child_pid;
-	int reset, i;
 
 	while (1)
 	{
-		i = 0;
-		reset = 0;
-		isatty(STDOUT_FILENO);
-		printf(GREEN_T "%s" RESET_COLOR, prompt);
-		getln = getline(&line, &bufsize, stdin);
-		if (getln == EOF || (strcmp(line, "exit\n") == 0))
+		i = isatty(STDOUT_FILENO);
+		line = _getline(i);
+
+		if (strcmp(line, "exit\n") == 0)
 			errors(0);
 		token = strtok(line, DELIM);
-		while (token != NULL)
+		for (i = 0; token != NULL; i++)
 		{
 			token2[i] = token;
 			token = strtok(NULL, DELIM);
-			i++;
 		}
 		child_pid = fork();
 		if (child_pid == -1)
