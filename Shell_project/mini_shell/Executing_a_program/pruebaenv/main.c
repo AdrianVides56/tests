@@ -37,14 +37,10 @@ int main(int argc, char **argv, char **envp)
 		if (child_pid == 0)
 		{
 			path = _getenv(envp, "PATH");
-//			printf("%s\n", path);
 			_execve(path, token2[0], token2);
-
 		}
 		else
-		{
 			 wait(NULL);
-		}
 		for (reset = 0; reset <= i; reset++)
 			token2[reset] = NULL;
 	}

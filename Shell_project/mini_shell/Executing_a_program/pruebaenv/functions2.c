@@ -59,7 +59,7 @@ void _execve(char *path, char *command, char **flags)
 	const char delim[2] = ":";
 	int i = 0;
 
-	tmp = malloc(sizeof(char ) * (strlen(path) +1));
+	tmp = malloc(sizeof(char) * (strlen(path) + 1));
 	tmp = strcpy(tmp, path);
 
 	token = strtok(tmp, delim);
