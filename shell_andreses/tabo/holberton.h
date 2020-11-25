@@ -30,4 +30,5 @@ int _putchar(char c);
 void printerror(int error, char *command);
 int word_len(char *str);
 int count_words(char *str);
+void free_grid(char **grid);
 #endif

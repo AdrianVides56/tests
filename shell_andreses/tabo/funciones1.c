@@ -55,7 +55,7 @@ int len(const char *str)
 
 char **tokenize(char *buffer)
 {
-	int words, i;
+	int words, i = 0;
 	char *token, **token2;
 	words = count_words(buffer);
 	if(words == 0)

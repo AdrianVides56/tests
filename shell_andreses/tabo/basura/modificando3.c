@@ -40,7 +40,6 @@ int main(int ac, char **av, char **envp)
 		}
 		else
 			wait(NULL);
-		free_grid(tokenized);
 		(void)ac;
 		(void)av;
 		(void)envp;
