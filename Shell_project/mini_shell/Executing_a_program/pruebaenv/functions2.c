@@ -7,7 +7,8 @@
  */
 char *_getline(size_t val_issaty)
 {
-	size_t bufsize = 0, getln = 0;
+	size_t bufsize = 0;
+	int getln = 0;
 	char *line = NULL;
 
 	if (val_issaty == 1)
@@ -80,13 +81,14 @@ char *_strstr(char *haystack, char *needle)
  */
 void _execve(char *path, char *command, char **flags)
 {
-	char *token, *token2[1024], *execute;
-	char *tmp, *tmp2;
+	char *token, *token2[1024], __attribute__((unused)) *execute;
+	char *tmp = malloc(sizeof(char) * (_strlen(path) + 1)), *tmp2;
 	const char delim[2] = ":";
-	int i = 0;
+	int i = 0, check = 0;
 
-	tmp = malloc(sizeof(char) * (strlen(path) + 1));
-	tmp = strcpy(tmp, path);
+	if (tmp == NULL)
+		errors(126);
+	tmp = _strcpy(tmp, path);
 
 	token = strtok(tmp, delim);
 	while (token != NULL)
@@ -95,15 +97,21 @@ void _execve(char *path, char *command, char **flags)
 		token = strtok(NULL, delim);
 		i++;
 	}
-
+/*	free(tmp);*/
 	tmp2 = malloc(sizeof(char) * 64);
+	if (tmp2 == NULL)
+		errors(126);
 	for (i = 0; token2[i] != NULL; i++)
 	{
-		tmp2 = strcpy(tmp2, token2[i]);
+		check = 0;
+		tmp2 = _strcpy(tmp2, token2[i]);
 		_strcat(tmp2, "/");
 		_strcat(tmp2, command);
-		if (execve(tmp2, flags, NULL) == -1)
+		check = execve(tmp2, flags, NULL);
+		if (check == -1)
 			continue;
 	}
-	errors(127);
-}
+	if (check == -1)
+		errors(127);
+	free(tmp2);
+	free(tmp);

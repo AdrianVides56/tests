@@ -7,21 +7,24 @@
  * @envp: enviroment pointer
  * Return: 0 Success
  */
-int main(int argc, char **argv, char **envp)
+int main(int __attribute__((unused)) argc, char __attribute__((unused)) **argv,
+	 char **envp)
 {
-	char *line;
-	char *token = NULL, *token2[1024], *path;
-	size_t getln, reset, i;
+	char *line = NULL;
+	char *token = NULL, **token2 = NULL, *path = NULL;
+	size_t i = 0;
 	pid_t child_pid;
 
 	while (1)
 	{
 		i = isatty(STDOUT_FILENO);
 		line = _getline(i);
-
 		if (strcmp(line, "exit\n") == 0)
 			errors(0);
 		token = strtok(line, DELIM);
+		token2  = malloc(sizeof(char *) * _strlen(line));
+		if (token2 == NULL)
+			errors(126);
 		for (i = 0; token != NULL; i++)
 		{
 			token2[i] = token;
@@ -33,12 +36,15 @@ int main(int argc, char **argv, char **envp)
 		if (child_pid == 0)
 		{
 			path = _getenv(envp, "PATH");
-			_execve(path, token2[0], token2);
+			if (execve(line, token2, NULL) == -1)
+				_execve(path, token2[0], token2);
 		}
 		else
 			 wait(NULL);
-		for (reset = 0; reset <= i; reset++)
-			token2[reset] = NULL;
+		for (i = 0; token2[i] != NULL; i++)
+			free(token2[i]);
+		free(token2);
 	}
+		free(line);
 	return (0);
 }

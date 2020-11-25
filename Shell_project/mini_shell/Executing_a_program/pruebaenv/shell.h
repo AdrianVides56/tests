@@ -21,5 +21,6 @@ char *_getline(size_t val_issaty);
 void _execve(char *path, char *command, char **flags);
 char *_getenv(char **myEnvp, char *path);
 char *_strstr(char *haystack, char *needle);
+char *_strcpy(char *dest, char *src);
 
 #endif
