@@ -3,15 +3,8 @@
 #include <sys/types.h>
 #include <sys/stat.h>
 #include <unistd.h>
-/**
-  * main - main function of our shell that will
-  * receive the arguments in an infinite loop
-  * @ac: number of arguments
-	* @av: arguments
-  * @envp: environment variables
-  * Return: 0 if success
-**/
- char *_strcat(char *dest, char *src);
+
+char *_strcat(char *dest, char *src);
 int main(int ac, char **av, char **envp)
 {
         char *prompt = "hola@shell$ ", *buffer = NULL;
@@ -58,9 +51,9 @@ int main(int ac, char **av, char **envp)
 					printf(" FOUND\n");	
 					execve(tokenized[0], tokenized, NULL);
 				}
-        			temp  =  malloc(sizeof(char ) * (strlen(mypath) + 1));
-			        temp = strcpy(temp, mypath);
-		        	token = strtok(temp, s);
+        				temp  =  malloc(sizeof(char ) * (strlen(mypath) + 1));
+			        	temp = strcpy(temp, mypath);
+		        		token = strtok(temp, s);
 			   	while( token != NULL )
         			{
 					combinar = malloc(sizeof(char) * (strlen(token) + strlen(tokenized[0]) + 2));
@@ -75,11 +68,6 @@ int main(int ac, char **av, char **envp)
                 }
                 else
                          wait(NULL);
-		(void)i;
-		(void)reset;
-		(void)ac;
-		(void)av;
-		(void)envp;
         }
         return (0);
 }
