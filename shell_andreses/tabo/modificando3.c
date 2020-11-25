@@ -19,8 +19,6 @@ int main(int ac, char **av, char **envp)
 	const char s[2] = ":"; 
         while (1)
 	{
-		list_t *head;
-		head = NULL;
                 i = 0;
                 reset = 0;
                 if (isatty(STDOUT_FILENO) == 1)
@@ -68,6 +66,11 @@ int main(int ac, char **av, char **envp)
                 }
                 else
                          wait(NULL);
+				(void)i;
+		(void)reset;
+		(void)ac;
+		(void)av;
+		(void)envp;
         }
         return (0);
 }
