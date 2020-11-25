@@ -1,3 +1,4 @@
+  
 #include "holberton.h"
 extern char **environ;
 
@@ -62,18 +63,16 @@ char **tokenize(char *buffer)
 		{
 		return NULL;
 		}
-	
 	token = strtok(buffer, DELIM);
 	token2 = malloc(sizeof(char *) * (words + 1));
 
 	while (token != NULL)
 	{
-		token2[i] = malloc(sizeof(char) * (_strlen(token) + 1));
-		token2[i] = strcpy(token2[i], token);
+		token2[i] = (char*)malloc(sizeof(char) * (_strlen(token) + 1));
+		token2[i] = token;
 		token = strtok(NULL, DELIM);
 		i++;
 	}
-	token2[i] = NULL;
 	return (token2);
 }
 
