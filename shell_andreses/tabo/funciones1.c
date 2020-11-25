@@ -1,6 +1,6 @@
 #include "holberton.h"
 extern char **environ;
-char *_strcat(char *dest, char *src)
+/*char *_strcat(char *dest, char *src)
 {
         int a, b;
 
@@ -14,7 +14,7 @@ char *_strcat(char *dest, char *src)
         }
         dest[a] = '\0';
         return (dest);
-}
+}*/
 
 char *_strstr(char *haystack, const char *needle)
 {
