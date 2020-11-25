@@ -1,0 +1,31 @@
+!_TAG_FILE_FORMAT	2	/extended format; --format=1 will not append ;" to lines/
+!_TAG_FILE_SORTED	1	/0=unsorted, 1=sorted, 2=foldcase/
+!_TAG_PROGRAM_AUTHOR	Darren Hiebert	/dhiebert@users.sourceforge.net/
+!_TAG_PROGRAM_NAME	Exuberant Ctags	//
+!_TAG_PROGRAM_URL	http://ctags.sourceforge.net	/official site/
+!_TAG_PROGRAM_VERSION	5.9~svn20110310	//
+DELIM	holberton.h	10;"	d
+HEADER_FILE	holberton.h	2;"	d
+_getenv	funciones1.c	/^char *_getenv(const char *name)$/;"	f
+_putchar	funciones1.c	/^int _putchar(char c)$/;"	f
+_puts	funciones1.c	/^void _puts(char *str)$/;"	f
+_strcat	funciones1.c	/^char *_strcat(char *dest, char *src)$/;"	f
+_strcmp	funciones1.c	/^int _strcmp(char *s1, char *s2)$/;"	f
+_strlen	funciones1.c	/^int _strlen(char *s)$/;"	f
+_strstr	funciones1.c	/^char *_strstr(char *haystack, const char *needle)$/;"	f
+add_node_end	funciones1.c	/^list_t *add_node_end(list_t **head, char *str)$/;"	f
+executar	funciones1.c	/^void executar ( list_t *h, char **direcion)$/;"	f
+free_grid	funciones1.c	/^void free_grid(char **grid)$/;"	f
+free_list	funciones1.c	/^void free_list(list_t *head)$/;"	f
+len	funciones1.c	/^int len(const char *str)$/;"	f
+len	holberton.h	/^	unsigned int len;$/;"	m	struct:list_s
+list_s	holberton.h	/^typedef struct list_s$/;"	s
+list_t	holberton.h	/^} list_t;$/;"	t	typeref:struct:list_s
+main	modificando2.c	/^int main(int ac, char **av, char **envp)$/;"	f
+next	holberton.h	/^	struct list_s *next;$/;"	m	struct:list_s	typeref:struct:list_s::list_s
+print_list	funciones1.c	/^size_t print_list(const list_t *h, char *comando)$/;"	f
+printenv	funciones1.c	/^list_t  *printenv(list_t **head, char *path)$/;"	f
+printerror	funciones1.c	/^void printerror(int error, char *command)$/;"	f
+process_execution	funciones1.c	/^void process_execution(int child_pid, char **tokenized, list_t *h)$/;"	f
+str	holberton.h	/^	char *str;$/;"	m	struct:list_s
+tokenize	funciones1.c	/^char **tokenize(char *buffer)$/;"	f
