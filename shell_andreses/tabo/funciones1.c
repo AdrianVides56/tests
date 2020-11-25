@@ -1,20 +1,5 @@
 #include "holberton.h"
 extern char **environ;
-/*char *_strcat(char *dest, char *src)
-{
-        int a, b;
-
-	for (a = 0; dest[a] != '\0'; a++)
-        {
-        }
-        for (b = 0; src[b] != '\0'; b++)
-        {
-        dest[a] = src[b];
-        a++;
-        }
-        dest[a] = '\0';
-        return (dest);
-}*/
 
 char *_strstr(char *haystack, const char *needle)
 {
@@ -56,52 +41,6 @@ char *_getenv(const char *name)
 	return NULL;
 }
 
-list_t  *printenv(list_t **head, char *path)
-{
-	/*printf("printenv --- %s", path);*/
-	char *token;
-	int a = 0;
-	char *temp  =  malloc(sizeof(char ) * (strlen(path) + 1));
-   	const char s[2] = ":";
-	temp = strcpy(temp, path);
-   /* get the first token */
-   	token = strtok(temp, s);
-   
-   /* walk through other tokens */
-   while( token != NULL && a <= 20 ) 
-	{
-     /*printf( "1 %s\n", token);*/
-    	add_node_end(head, token);
-      	token = strtok(NULL, s);
-	a++;
-	  }
-	free(temp);
-	return(*head);
-}
-
-list_t *add_node_end(list_t **head, char *str)
-{
-    list_t *new_node = (list_t *) malloc(sizeof(list_t));
-    list_t *last = *head;
-
-    if (new_node == NULL || str == NULL)
-    {
-        free(new_node);
-        return (new_node);
-    }
-    new_node->str = strdup(str);
-    new_node->len = len(str);
-    new_node->next = NULL;
-    if (*head == NULL)
-    {
-        *head = new_node;
-        return (*head);
-    }
-    while (last->next != NULL)
-        last = last->next;
-    last->next = new_node;
-    return (*head);
-}
 
 int len(const char *str)
 {
@@ -114,65 +53,17 @@ int len(const char *str)
     return (count);
 }
 
-size_t print_list(const list_t *h, char *comando)
-{
-    unsigned int count = 0;
-
-    if (h == NULL)
-        return (0);
-    while (h != NULL)
-    {
-        if (h->str == NULL)
-            printf("[%u] (nil)\n", h->len);
-        else
-	{
-            	_strcat(h->str, "/");
-		_strcat(h->str, comando);
-	}
-           /*printf("[%u] %s\n", h->len, h->str);*/
-        count += 1;
-        h = h->next;
-    }
-    return (count);
-}
-
-void executar ( list_t *h, char **direcion)
-{
-    unsigned int count = 0;
-	
-    while (h != NULL)
-    {
-        if (h->str == NULL)
-            printf("[%u] (nil)\n", h->len);
-	/*printf("%s\n", h->str);*/
-	execve(h->str, direcion, NULL);
-        count += 1;
-        h = h->next;
-    }
-}
-void free_list(list_t *head)
-{
-        list_t *tmp;
-        if (head == NULL)
-        {
-                return;
-        }
-        while (head != NULL)
-        {
-                tmp = head;
-                free(tmp->str);
-                free(tmp);
-                head = head->next;
-        }
-}
-
 char **tokenize(char *buffer)
 {
-	int i = 0;
+	int words, i;
 	char *token, **token2;
-	
+	words = count_words(buffer);
+	if(words == 0)
+		{
+		return NULL;
+		}
 	token = strtok(buffer, DELIM);
-	token2 = malloc(sizeof(char *) * (30));
+	token2 = malloc(sizeof(char *) * (words + 1));
 
 	while (token != NULL)
 	{
@@ -192,26 +83,6 @@ int _strlen(char *s)
 		{
 	}
 	return (l);
-}
-void process_execution(int child_pid, char **tokenized, list_t *h)
-{
-	if (child_pid == -1)
-	{
-		_puts("Error");
-	}
-	if (child_pid == 0)
-	{
-		if ((execve(tokenized[0], tokenized, NULL)) == -1)
-		{
-		/*
-			execve(_strcat(path, tokenized[0]), tokenized, NULL);
-			execve(_strcat(path2, tokenized[0]), tokenized, NULL);
-		*/
-		executar(h, tokenized);
-		}
-	}
-	else
-		child_pid = wait(NULL);
 }
 void _puts(char *str)
 {
@@ -272,4 +143,35 @@ void free_grid(char **grid)
 		free(grid[i]);
 	}
 	free(grid);
+}
+int word_len(char *str)
+{
+	int index = 0, len = 0;
+
+	while (*(str + index) && *(str + index) != ' ')
+	{
+		len++;
+		index++;
+	}
+
+	return (len);
+}
+
+int count_words(char *str)
+{
+	int index = 0, words = 0, len = 0;
+
+	for (index = 0; *(str + index); index++)
+		len++;
+
+	for (index = 0; index < len; index++)
+	{
+		if (*(str + index) != ' ')
+		{
+			words++;
+			index += word_len(str + index);
+		}
+	}
+
+	return (words);
 }

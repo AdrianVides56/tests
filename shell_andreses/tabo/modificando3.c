@@ -12,7 +12,7 @@ int main(int ac, char **av, char **envp)
         size_t bufsize = 1024;
         pid_t child_pid;
         int getln;
-	char *mypath, **tokenized; 
+	char *mypath, **tokenized;
         while (1)
 	{
                 if (isatty(STDOUT_FILENO) == 1)
@@ -22,7 +22,9 @@ int main(int ac, char **av, char **envp)
                 {
                         printerror(1, NULL);
                 }
+
                 tokenized = tokenize(buffer);
+
                 if (tokenized[0] != NULL && (_strcmp(tokenized[0], "exit") == 0) )
                 {
 			printf("\n"); 
