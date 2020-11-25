@@ -8,19 +8,9 @@
 #include <string.h>
 #include <sys/wait.h>
 #define DELIM " ,!¡¿?\'\"\n\t"
-/**
- * struct list_s - singly linked list
- * @str: string - (malloc'ed string)
- * @len: length of the string
- * @next: points to the next node
- *
- * Description: singly linked list node structure
- * for Holberton project
- */
 
-char **_getpath(const char *name);
+
 char *_getenv(const char *name);
-int len(const char *str);
 char *_strstr(char *haystack, const char *needle); 
 char **tokenize(char *buffer);
 int _strlen(char *s);
