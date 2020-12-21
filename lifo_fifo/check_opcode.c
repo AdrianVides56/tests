@@ -16,11 +16,11 @@ void checkFunction(const char *token, unsigned int line_number, stack_t **stack)
 {
 	instruction_t func_code[] = 
 	{
-		{"push", f_push },
+		{"push", f_push},
 		{"pall", f_pall},
-		{"pint"},
-		{"pop"},
-		{"swap"},
+		{"pint", f_pint},
+		{"pop", f_pop},
+		{"swap", f_swap},
 		{"add"},
 		{"nop"},
 		{NULL}

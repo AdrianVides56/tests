@@ -40,4 +40,8 @@ int check_push(char *s);
 void f_push(stack_t **stack, unsigned int line_number);
 void free_list(stack_t *stack);
 void f_pall(stack_t **head, unsigned int line_number);
+void f_pint(stack_t **head, unsigned int line_number);
+void f_pop(stack_t **head, unsigned int line_number);
+void f_swap(stack_t **head, unsigned int line_number);
+
 #endif
