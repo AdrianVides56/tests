@@ -12,7 +12,7 @@
  *         (+, -, *, /, %),return NULL)
  *
  */
-void checkFunction(void)
+void checkFunction(char *token)
 {
 	instruction_t func_code[] = 
 	{
@@ -30,7 +30,6 @@ void checkFunction(void)
 	{
 		if (strcmp(func_code[i].opcode, token) == 0)
 		{
-			printf("Function FOund-----%s\n",token);
 			break;
 		}
 		i++;

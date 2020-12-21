@@ -2,7 +2,7 @@
 #include <stdlib.h>
 #include <string.h>
 #define DELIM " \n"
-char *token;
+char *numero;
 int check_push(char *s);
 int main()
 {
@@ -11,11 +11,13 @@ int main()
 	ssize_t read = 0;	
 	unsigned  int line_number = 1;
 	char *aux = NULL;
-	ifp = fopen("../monty.txt", "r");
+	char *token = NULL;
+	ifp = fopen("monty.txt", "r");
 	while ((read = getline(&aux, &len, ifp)) != -1)
 	{
 		if(*aux != '\n')
 		{
+			numero = NULL;
 			if(*aux == ' ')
 				token = strtok(aux, DELIM);
 			if (*aux != ' ')
@@ -24,9 +26,10 @@ int main()
 				continue;
 			while(token != NULL && check_push(token) != 0)
 			{
-				token = strcat(token, strtok(NULL, DELIM));
+				strcpy(numero,strtok(NULL, DELIM));
+			printf("--%s---\n", numero);
 			}
-			printf("---%s---\n",token);
+			printf("--%s---\n",token);
 			line_number += 1;
 		}
 	}
