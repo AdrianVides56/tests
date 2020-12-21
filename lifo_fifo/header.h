@@ -4,7 +4,7 @@
 #include <stdlib.h>
 #include <string.h>
 
-extern char *token;
+extern char *second;
 /**
  * struct stack_s - doubly linked list representation of a stack (or queue)
  * @n: integer
@@ -35,9 +35,9 @@ typedef struct instruction_s
         char *opcode;
         void (*f)(stack_t **stack, unsigned int line_number);
 } instruction_t;
-void checkFunction(char *token);
+void checkFunction(const char *token, unsigned int line_number, stack_t **stack);
 int check_push(char *s);
-
-
-
+void f_push(stack_t **stack, unsigned int line_number);
+void free_list(stack_t *stack);
+void f_pall(stack_t **head, unsigned int line_number);
 #endif
