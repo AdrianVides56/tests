@@ -1,9 +1,9 @@
-#include <stdio.h>
-#include <stdlib.h>
-#include <string.h>
+#include "header.h"
 #define DELIM " \n"
+
 char *token;
-int check_push(char *s);
+char *second;
+
 int main()
 {
 	FILE *ifp;
@@ -21,33 +21,18 @@ int main()
 			if (*aux != ' ')
 				token = strtok(aux, DELIM);
 			if (*token == '#')
-				continue;
-			while(token != NULL && check_push(token) != 0)
 			{
-				token = strcat(token, strtok(NULL, DELIM));
+				continue;
 			}
+			if (check_push(token) != 0 && token != NULL)
+				second = strtok(NULL, DELIM);
+			else
+				second = NULL;
+			checkFunction();
 			line_number += 1;
 		}
 	}
 	free(aux);
 	fclose (ifp);
 	return 0;
-}
-int check_push(char *s)
-{
-	char *accept = "push";
-	int i = 0;
-	if (s == NULL)
-	{
-		return 0;
-	}
-	while(s[i] == accept[i])
-        {
-            i++;
-        }
-        if (i == 5 && s[i] == ' ')
-	{
-		return 1;
-	}
-        return 0;
 }

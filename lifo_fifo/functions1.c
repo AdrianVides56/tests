@@ -1,4 +1,4 @@
-#include "3-calc.h"
+#include "header.h"
 /**
  * get_op_func - function that selects the correct function to perform the
  *               operation asked by the user.
@@ -12,25 +12,39 @@
  *         (+, -, *, /, %),return NULL)
  *
  */
-int (*get_op_func(char *s))(int a, int b)
+void checkFunction(void)
 {
-	op_t ops[] = {
-		{"+", op_add},
-		{"-", op_sub},
-		{"*", op_mul},
-		{"/", op_div},
-		{"%", op_mod},
-		{NULL, NULL}
+	instruction_t func_code[] = 
+	{
+		{"push"},
+		{"pall"},
+		{"pint"},
+		{"pop"},
+		{"swap"},
+		{"add"},
+		{"nop"},
+		{NULL}
 	};
 	int i = 0;
-
-	while (ops[i].op != NULL)
+	while (func_code[i].opcode != NULL)
 	{
-		if (*ops[i].op == *s)
+		if (strcmp(func_code[i].opcode, token) == 0)
 		{
-			return (ops[i].f);
+			printf("Function FOund-----%s\n",token);
+			break;
 		}
 		i++;
 	}
-	return (NULL);
+}
+int check_push(char *s)
+{
+        char *accept = "push";
+        int i = 0;
+        if (s == NULL)
+                return 0;
+        while(s[i] == accept[i])
+                i++;
+        if (i == 5 && s[i] == ' ')
+                return 1;
+        return 0;
 }
