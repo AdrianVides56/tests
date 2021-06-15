@@ -1,0 +1,2 @@
+git push --set-upstream origin branchName
+the no more need of push -u origin branchName
